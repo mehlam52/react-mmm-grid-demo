@@ -1,5 +1,4 @@
-export const code = `import { Rating } from "@mui/material";
-import { useState } from "react";
+export const code = `import { useState } from "react";
 import MyGrid, { MMMGridColumnProps } from "react-mmm-grid";
 
 const products = [
@@ -29,6 +28,12 @@ const products = [
     id: 5,
   },
 ];
+
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
 
 function App() {
   const columns: MMMGridColumnProps[] = [
@@ -81,12 +86,27 @@ function App() {
         { label: "Kolkata", value: "Kolkata" },
       ],
     },
-
+    // {
+    //   name: "rating",
+    //   title: "Rating",
+    //   minWidth: 150,
+    //   render: (row: any, rowIndex: number) => (
+    //     <Rating
+    //       name="simple-controlled"
+    //       value={row.rating || 0}
+    //       onChange={(event, newValue) => {
+    //         handleGridChange(rowIndex, "rating", newValue);
+    //       }}
+    //     />
+    //   ),
+    // },
     {
       name: "avatar",
       title: "Avatar",
       minWidth: 150,
       render: (row: any, rowIndex: number) => {
+        // const colors = ["red", "green", "blue", "orange", "purple"];
+        // const color = colors[Math.floor(Math.random() * colors.length)];
         return (
           <div>
             <div
@@ -145,10 +165,10 @@ function App() {
     },
   ];
 
-  const [rows, setRows] = useState([{}]);
+  const [rows, setRows] = useState([{}, {}]);
   const [activeGridRow, setActiveGridRow] = useState<any>();
 
-  const [rows2, setRows2] = useState([{}]);
+  const [rows2, setRows2] = useState([{}, {}]);
 
   const handleGridChange = async (
     rowIndex: number,
@@ -164,7 +184,7 @@ function App() {
     }
     temp[rowIndex] = { ...temp[rowIndex], [name]: val };
 
-    if (rowIndex >= temp.length - 1) {
+    if (rowIndex >= temp.length - 2) {
       temp.push({});
     }
 
@@ -214,7 +234,7 @@ function App() {
       temp[rowIndex] = { ...temp[rowIndex], [name]: val };
     }
 
-    if (rowIndex >= temp.length - 1) {
+    if (rowIndex >= temp.length - 2) {
       temp.push({});
     }
 
@@ -233,50 +253,51 @@ function App() {
   };
 
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <h1 style={{ textAlign: "center", color: "gray" }}>
         <u>MMM Grid Demo</u>
       </h1>
 
-      <h2 style={{ color: "gray" }}>Grid 1</h2>
-      <MyGrid
-        columns={columns}
-        rows={rows}
-        height={200}
-        handleChange={handleGridChange}
-        deleteRows
-        handleDelete={handleRowsDelete}
-        setActiveGridRow={setActiveGridRow}
-        idPrefix="grid1" // should be unique for each grid in the same page
-      />
-      <div style={{ marginTop: 7, textAlign: "center", color: "blue" }}>
-        <b>Active row first name : {activeGridRow?.name}</b>
-      </div>
+      <div style={{ width: "100%" }}>
+        <h2 style={{ color: "gray" }}>Grid 1</h2>
+        <MyGrid
+          columns={columns}
+          rows={rows}
+          height={200}
+          handleChange={handleGridChange}
+          deleteRows
+          handleDelete={handleRowsDelete}
+          setActiveGridRow={setActiveGridRow}
+          idPrefix="grid1" // should be unique for each grid in the same page
+        />
+        <div style={{ marginTop: 7, textAlign: "center", color: "blue" }}>
+          <b>Active row first name : {activeGridRow?.name}</b>
+        </div>
 
-      <br />
-      <br />
-      <h2 style={{ color: "gray" }}>Grid 2</h2>
-      <MyGrid
-        columns={columns2}
-        rows={rows2}
-        height={200}
-        handleChange={handleGridChange2}
-        deleteRows
-        handleDelete={handleRowsDelete2}
-        idPrefix="grid2" // should be unique for each grid in the same page
-      />
-      <div style={{ marginTop: 7, textAlign: "center", color: "blue" }}>
-        <b>
-          Total :{" "}
-          {rows2
-            .reduce((acc: any, x: any) => acc + (x.total || 0), 0)
-            .toFixed(2)}
-        </b>
+        <br />
+        <br />
+        <h2 style={{ color: "gray" }}>Grid 2</h2>
+        <MyGrid
+          columns={columns2}
+          rows={rows2}
+          height={200}
+          handleChange={handleGridChange2}
+          deleteRows
+          handleDelete={handleRowsDelete2}
+          idPrefix="grid2" // should be unique for each grid in the same page
+        />
+        <div style={{ marginTop: 7, textAlign: "center", color: "blue" }}>
+          <b>
+            Total :{" "}
+            {rows2
+              .reduce((acc: any, x: any) => acc + (x.total || 0), 0)
+              .toFixed(2)}
+          </b>
+        </div>
+        <br />
+        <br />
       </div>
-      <br />
-      <br />
     </div>
-    
   );
 }
 
