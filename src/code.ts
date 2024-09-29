@@ -198,6 +198,7 @@ function App() {
     }
     temp = temp.filter((x: any) => x.name);
     temp.push({});
+    temp.push({});
 
     setRows(temp);
   };
@@ -247,6 +248,7 @@ function App() {
       temp[indexes[i]] = {};
     }
     temp = temp.filter((x: any) => x.name);
+    temp.push({});
     temp.push({});
 
     setRows2(temp);
