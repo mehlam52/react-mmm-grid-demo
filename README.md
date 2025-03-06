@@ -45,7 +45,7 @@ import MyGrid, { MMMGridColumnProps } from "react-mmm-grid";
 
 
 function App() {
-  const columns: MMMGridColumnProps[] = [
+  const columns: MMMGridColumnProps[]  = [
     {
       name: "name",
       title: "First Name",
