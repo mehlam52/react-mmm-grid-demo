@@ -2968,10 +2968,10 @@ react-is@^18.3.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.3.1.tgz#e83557dc12eae63a99e003a46388b1dcbb44db7e"
   integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
 
-react-mmm-grid@^1.0.13:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/react-mmm-grid/-/react-mmm-grid-1.0.13.tgz#802045685800b36f993f6558a17daf9388ef50d8"
-  integrity sha512-UgQb5hUbzGfh9Rk6IWabP261KA5omfGJHD6iqjHdW+jBkfbgXzb9sMJyNTCoybgOXjbNFCShOgI81fN03xkZBw==
+react-mmm-grid@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-mmm-grid/-/react-mmm-grid-2.0.1.tgz#cf07ad35cd459e1fa0a87efe24ff92416c2c2a11"
+  integrity sha512-Dsd6ffrQhPxb7EVVE0xloBwuQ2hAUfQoSZly9sSbjZrih83BgYjnwBcfJ5Ve2Oxodavxl9ufji2DgaR3GfWtDQ==
   dependencies:
     react-select "^5.8.1"
     rollup "^4.22.4"

@@ -1,5 +1,9 @@
-export const code = `import { useState } from "react";
-import MyGrid, { MMMGridColumnProps } from "react-mmm-grid";
+export const code = `
+import { Box, Rating, Tab, Tabs } from "@mui/material";
+import { useState } from "react";
+import MMMGrid, { MMMGridColumnProps } from "react-mmm-grid";
+import { code } from "./code";
+import { CopyBlock } from "react-code-blocks";
 
 const products = [
   {
@@ -33,6 +37,29 @@ interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
+}
+
+function CustomTabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={\`simple-tabpanel-\${index}\`}
+      aria-labelledby={\`simple-tab-\${index}\`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  );
+}
+
+function a11yProps(index: number) {
+  return {
+    id: \`simple-tab-\${index}\`,
+    "aria-controls": \`simple-tabpanel-\${index}\`,
+  };
 }
 
 function App() {
@@ -165,6 +192,11 @@ function App() {
     },
   ];
 
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
   const [rows, setRows] = useState([{}, {}]);
   const [activeGridRow, setActiveGridRow] = useState<any>();
 
@@ -260,48 +292,83 @@ function App() {
         <u>MMM Grid Demo</u>
       </h1>
 
+      <Box sx={{ borderBottom: 1, borderColor: "divider", width: "100%" }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
+          <Tab label="Demo" {...a11yProps(0)} />
+          <Tab label="Code" {...a11yProps(1)} />
+        </Tabs>
+      </Box>
       <div style={{ width: "100%" }}>
-        <h2 style={{ color: "gray" }}>Grid 1</h2>
-        <MyGrid
-          columns={columns}
-          rows={rows}
-          height={200}
-          handleChange={handleGridChange}
-          deleteRows
-          handleDelete={handleRowsDelete}
-          setActiveGridRow={setActiveGridRow}
-          idPrefix="grid1" // should be unique for each grid in the same page
-        />
-        <div style={{ marginTop: 7, textAlign: "center", color: "blue" }}>
-          <b>Active row first name : {activeGridRow?.name}</b>
-        </div>
+        <CustomTabPanel value={value} index={0}>
+          <h2 style={{ color: "gray" }}>Grid 1</h2>
+          <div
+            style={{
+              width: "calc(100vw - 50px)",
+              overflowX: "auto",
+            }}
+          >
+            <MMMGrid
+              columns={columns}
+              rows={rows}
+              height={200}
+              handleChange={handleGridChange}
+              deleteRows
+              handleDelete={handleRowsDelete}
+              setActiveGridRow={setActiveGridRow}
+              idPrefix="grid1" // should be unique for each grid in the same page
+            />
+          </div>
+          <div style={{ marginTop: 7, textAlign: "center", color: "blue" }}>
+            <b>Active row first name : {activeGridRow?.name}</b>
+          </div>
 
-        <br />
-        <br />
-        <h2 style={{ color: "gray" }}>Grid 2</h2>
-        <MyGrid
-          columns={columns2}
-          rows={rows2}
-          height={200}
-          handleChange={handleGridChange2}
-          deleteRows
-          handleDelete={handleRowsDelete2}
-          idPrefix="grid2" // should be unique for each grid in the same page
-        />
-        <div style={{ marginTop: 7, textAlign: "center", color: "blue" }}>
-          <b>
-            Total :{" "}
-            {rows2
-              .reduce((acc: any, x: any) => acc + (x.total || 0), 0)
-              .toFixed(2)}
-          </b>
-        </div>
-        <br />
-        <br />
+          <br />
+          <br />
+          <h2 style={{ color: "gray" }}>Grid 2</h2>
+          <div
+            style={{
+              width: "calc(100vw - 50px)",
+              overflowX: "auto",
+            }}
+          >
+            <MMMGrid
+              columns={columns2}
+              rows={rows2}
+              height={200}
+              handleChange={handleGridChange2}
+              deleteRows
+              handleDelete={handleRowsDelete2}
+              idPrefix="grid2" // should be unique for each grid in the same page
+            />
+          </div>
+          <div style={{ marginTop: 7, textAlign: "center", color: "blue" }}>
+            <b>
+              Total :{" "}
+              {rows2
+                .reduce((acc: any, x: any) => acc + (x.total || 0), 0)
+                .toFixed(2)}
+            </b>
+          </div>
+          <br />
+          <br />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={1}>
+          {/* code  */}
+          <div
+            style={{ padding: 10, backgroundColor: "#f9f9f9", width: "100%" }}
+          >
+            {/* <pre>{code}</pre> */}
+            <CopyBlock text={code} language={"tsx"} showLineNumbers={true} />
+          </div>
+        </CustomTabPanel>
       </div>
     </div>
   );
 }
 
 export default App;
-`;
+`

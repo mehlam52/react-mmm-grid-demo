@@ -1,6 +1,6 @@
 import { Box, Rating, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
-import MyGrid, { MMMGridColumnProps } from "react-mmm-grid";
+import MMMGrid, { MMMGridColumnProps } from "react-mmm-grid";
 import { code } from "./code";
 import { CopyBlock } from "react-code-blocks";
 
@@ -304,16 +304,23 @@ function App() {
       <div style={{ width: "100%" }}>
         <CustomTabPanel value={value} index={0}>
           <h2 style={{ color: "gray" }}>Grid 1</h2>
-          <MyGrid
-            columns={columns}
-            rows={rows}
-            height={200}
-            handleChange={handleGridChange}
-            deleteRows
-            handleDelete={handleRowsDelete}
-            setActiveGridRow={setActiveGridRow}
-            idPrefix="grid1" // should be unique for each grid in the same page
-          />
+          <div
+            style={{
+              width: "calc(100vw - 50px)",
+              overflowX: "auto",
+            }}
+          >
+            <MMMGrid
+              columns={columns}
+              rows={rows}
+              height={200}
+              handleChange={handleGridChange}
+              deleteRows
+              handleDelete={handleRowsDelete}
+              setActiveGridRow={setActiveGridRow}
+              idPrefix="grid1" // should be unique for each grid in the same page
+            />
+          </div>
           <div style={{ marginTop: 7, textAlign: "center", color: "blue" }}>
             <b>Active row first name : {activeGridRow?.name}</b>
           </div>
@@ -321,15 +328,22 @@ function App() {
           <br />
           <br />
           <h2 style={{ color: "gray" }}>Grid 2</h2>
-          <MyGrid
-            columns={columns2}
-            rows={rows2}
-            height={200}
-            handleChange={handleGridChange2}
-            deleteRows
-            handleDelete={handleRowsDelete2}
-            idPrefix="grid2" // should be unique for each grid in the same page
-          />
+          <div
+            style={{
+              width: "calc(100vw - 50px)",
+              overflowX: "auto",
+            }}
+          >
+            <MMMGrid
+              columns={columns2}
+              rows={rows2}
+              height={200}
+              handleChange={handleGridChange2}
+              deleteRows
+              handleDelete={handleRowsDelete2}
+              idPrefix="grid2" // should be unique for each grid in the same page
+            />
+          </div>
           <div style={{ marginTop: 7, textAlign: "center", color: "blue" }}>
             <b>
               Total :{" "}
