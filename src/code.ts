@@ -142,7 +142,7 @@ function App() {
                 width: 35,
                 height: 35,
                 borderRadius: 25,
-                backgroundColor: "blue",
+                backgroundColor: "#1976d2",
                 justifyContent: "center",
                 alignItems: "center",
                 margin: "auto",
@@ -322,7 +322,7 @@ function App() {
               idPrefix="grid1" // should be unique for each grid in the same page
             />
           </div>
-          <div style={{ marginTop: 7, textAlign: "center", color: "blue" }}>
+          <div style={{ marginTop: 7, textAlign: "center", color: "#1976d2" }}>
             <b>Active row first name : {activeGridRow?.name}</b>
           </div>
 
@@ -343,6 +343,7 @@ function App() {
               deleteRows
               handleDelete={handleRowsDelete2}
               idPrefix="grid2" // should be unique for each grid in the same page
+              enableSearch
             />
           </div>
           <div style={{ marginTop: 7, textAlign: "center", color: "blue" }}>
